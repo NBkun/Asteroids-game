@@ -9,6 +9,8 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     dt = 0
+    score = 0
+    font = pygame.font.Font(None, 36)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     print("Starting Asteroids! \nScreen width: 1280 \nScreen height: 720")
 
@@ -38,10 +40,17 @@ def main():
                 sys.exit()
             for shot in shots:
                 if shot.collision(asteroid):
+                    if asteroid.radius <= ASTEROID_MIN_RADIUS:
+                        score += 3
+                    else:
+                        score += 1
                     asteroid.split()
                     shot.kill()
 
         screen.fill("black")
+
+        score_text = font.render("Score: " + str(score), True, "White")
+        screen.blit(score_text, (580, 20))
 
         for obj in drawable:
             obj.draw(screen)
