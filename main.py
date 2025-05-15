@@ -3,7 +3,7 @@ from constants import *
 from player import *
 
 def main():
-    pygame.init
+    pygame.init()
     clock = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -20,6 +20,7 @@ def main():
         screen.fill("black")
 
         # draw player
+        player.update(dt)
         player.draw(screen)
 
         # refresh the screen
